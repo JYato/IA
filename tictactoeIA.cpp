@@ -166,10 +166,10 @@ public:
 int evaluar(vector<string> tablero, int pos_eval){
     switch(pos_eval){
     case 0:
-        if((tablero[0] == "x" && tablero[1] == "x" && tablero[2] == "x") || (tablero[0] == "x" && tablero[3] == "x" && tablero[3] == "x") || (tablero[0] == "x" && tablero[4] == "x" && tablero[8] == "x")){
+        if((tablero[0] == "x" && tablero[1] == "x" && tablero[2] == "x") || (tablero[0] == "x" && tablero[3] == "x" && tablero[6] == "x") || (tablero[0] == "x" && tablero[4] == "x" && tablero[8] == "x")){
             return 1;
         }
-        else if((tablero[0] == "o" && tablero[1] == "o" && tablero[2] == "o") || (tablero[0] == "o" && tablero[3] == "o" && tablero[3] == "o") || (tablero[0] == "o" && tablero[4] == "o" && tablero[8] == "o")){
+        else if((tablero[0] == "o" && tablero[1] == "o" && tablero[2] == "o") || (tablero[0] == "o" && tablero[3] == "o" && tablero[6] == "o") || (tablero[0] == "o" && tablero[4] == "o" && tablero[8] == "o")){
             return 2;
         }
         break;
@@ -263,17 +263,27 @@ int main()
     if(opcion == "a"){
         for(int i = 0; i < 5 && win == 0; i++){
             Nodo* game = new Nodo(tablero,profundidad,false);
-            //game->tablero = tablero;
+            game->actuar();
             game->posicion_poner_IA();
             int pos = game->maximo();
             tablero[pos] = "x";
             cout << "Movimiento IA: " << endl;
             print_tablero(tablero);
+            win = evaluar(tablero,pos); if(win)break;
+
+
+           /* Nodo* game = new Nodo(tablero,profundidad,false);
+            int pos = game->maximo();
+            tablero[pos] = "x";
+            cout << "Movimiento IA: " << endl;
+            print_tablero(tablero);*/
+
             int pos_humano;
             cout << "En que posicion pondra su ficha?: "; cin >> pos_humano;
             tablero[pos_humano] = "o";
             cout << "Movimiento HUMANO: " << endl;
             print_tablero(tablero);
+            win = evaluar(tablero,pos_humano); if(win)break;
         }
     }
     else if(opcion == "b"){
@@ -300,7 +310,7 @@ int main()
     if(win == 1){
         cout << "Gano la IA" << endl;
     }
-    else{
+    else if(win == 2){
         cout << "Gano usted" << endl;
     }
 

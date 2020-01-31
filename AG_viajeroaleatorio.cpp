@@ -280,7 +280,7 @@ vector<Ciudad> genetico_viajero(vector<Ciudad> &Ciudads){
     vector<Ciudad> result = ACTUAL.getprim();
     vector<int> rIndexes = ACTUAL.getprimIndexes();
 
-    //cout << "Ruta con más aptitud en Poblacion inicial - distancia:"<< ACTUAL.getNoaptitud(0)<< endl;
+    //cout << "Ruta con mÃ¡s aptitud en Poblacion inicial - distancia:"<< ACTUAL.getNoaptitud(0)<< endl;
     cout << "Nodos:" << endl;
     for(int i = 0; i < result.size(); i++) {
         cout<< rIndexes[i] << " : "<< result[i].x << " " << result[i].y << endl;
